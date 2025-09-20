@@ -3,18 +3,36 @@
 
 int main() {
 
-   float basic, hra, da, gross;
+   int num, sum = 0, rev = 0, digit;
 
-   printf("Enter Basic Salary, HRA, DA: ");
+   printf("Enter a 3-digit number: ");
 
-   scanf("%f %f %f", &basic, &hra, &da);
+   scanf("%d", &num);
 
  
 
-   gross = basic + hra + da;
+   int temp = num;
 
-   printf("Gross Salary = %.2f\n", gross);
+   while(temp != 0) {
+
+       digit = temp % 10;
+
+       sum += digit;
+
+       rev = rev * 10 + digit;
+
+       temp /= 10;
+
+   }
+
+ 
+
+   printf("Sum of digits = %d\n", sum);
+
+   printf("Reverse = %d\n", rev);
 
  
 
    return 0;
+
+}
