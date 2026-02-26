@@ -1,0 +1,118 @@
+include <stdio.h>
+#include <string.h>
+
+#define SIZE 50
+
+char patients[SIZE][30];   // stores names
+int front = -1;
+int rear = -1;
+
+// Function to add patient
+void addPatient(char name[])
+{
+    if (rear == SIZE - 1)
+    {
+        printf("Queue is full.\n");
+        return;
+    }
+
+    if (front == -1)
+        front = 0;
+
+    rear++;
+    strcpy(patients[rear], name);
+
+    printf("Patient added.\n");
+}
+
+// Function to serve patient
+void servePatient()
+{
+    if (front == -1 || front > rear)
+    {
+        printf("No patient to serve.\n");
+        return;
+    }
+
+    printf("Now serving: %s\n", patients[front]);
+    front++;
+
+    if (front > rear)
+    {
+        front = -1;
+        rear = -1;
+    }
+}
+
+// Function to see next patient
+void nextPatient()
+{
+    if (front == -1)
+        printf("Queue is empty.\n");
+    else
+        printf("Next patient: %s\n", patients[front]);
+}
+
+// Function to display all patients
+void showPatients()
+{
+    if (front == -1)
+    {
+        printf("No patients waiting.\n");
+        return;
+    }
+
+    printf("Waiting List:\n");
+    for (int i = front; i <= rear; i++)
+    {
+        printf("%s\n", patients[i]);
+    }
+}
+
+int main()
+{
+    int choice;
+    char name[30];
+
+    do
+    {
+        printf("\n1. Add Patient");
+        printf("\n2. View Next Patient");
+        printf("\n3. Serve Patient");
+        printf("\n4. Show All Patients");
+        printf("\n5. Exit");
+        printf("\nEnter choice: ");
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+        case 1:
+            printf("Enter patient name: ");
+            scanf("%s", name);
+            addPatient(name);
+            break;
+
+        case 2:
+            nextPatient();
+            break;
+
+        case 3:
+            servePatient();
+            break;
+
+        case 4:
+            showPatients();
+            break;
+
+        case 5:
+            printf("Program ended.\n");
+            break;
+
+        default:
+            printf("Wrong choice.\n");
+        }
+
+    } while (choice != 5);
+
+    return 0;
+}
